@@ -236,10 +236,9 @@ sudo dnf install nginx
 
 🌞 **Mais aussi déterminer...**
 
-- l'adresse `http` ou `https` des serveurs où vous téléchargez des paquets
-- une commande `apt install` ou `dnf install` permet juste de faire un téléchargement HTTP
-- ma question c'est donc : sur quel URL tu t'es connecté pour télécharger ce paquet
-- il existe un dossier qui contient la liste des URLs consultées quand vous demandez un téléchargement de paquets
+```bash
+[et0@TP2 ~]$ sudo cat /var/log/dnf.log | grep http
+```
 
 # Partie 3 : Poupée russe
 
@@ -268,7 +267,9 @@ Pour finir de vous exercer avec le terminal, je vous ai préparé une poupée ru
 
 🌞 **Récupérer le fichier `meow`**
 
-- téléchargez-le à l'aide d'une commande
+```bash
+stanislasthabault@MacBook-Pro-de-Stanislas ~ % scp meow et0@10.1.1.11:/home/et0/meow
+```
 
 🌞 **Trouver le dossier `dawa/`**
 
@@ -309,16 +310,42 @@ meow: RAR archive data, v5
 [et0@TP2 ~]$ ls
 meow.rar
 ```
+```bash
+[et0@TP2 ~]$ file meow
+meow: gzip compressed data, from Unix, original size modulo 2^32 145049600
+[et0@TP2 ~]$ mv meow meow.gz
+[et0@TP2 ~]$ ls
+meow.gz
+[et0@TP2 ~]$ gzip -d meow.gz
+```
+```bash
+[et0@TP2 ~]$ file meow
+meow: POSIX tar archive (GNU)
+[et0@TP2 ~]$ mv meow meow.tar
+[et0@TP2 ~]$ ls
+meow.tar
+[et0@TP2 ~]$ tar -xvf meow.tar
+```
 
 🌞 **Dans le dossier `dawa/`, déterminer le chemin vers**
 
-- le seul fichier de 15Mo
-- le seul fichier qui ne contient que des `7`
-- le seul fichier qui est nommé `cookie`
-- le seul fichier caché (un fichier caché c'est juste un fichier dont le nom commence par un `.`)
-- le seul fichier qui date de 2014
-- le seul fichier qui a 5 dossiers-parents
-  - je pense que vous avez vu que la structure c'est 50 `folderX`, chacun contient 50 dossiers `X`, et chacun contient 50 `fileX`
-  - bon bah là y'a un fichier qui est contenu dans `folderX/X/X/X/X/` et c'est le seul qui 5 dossiers parents comme ça
-
-
+```bash
+[et0@TP2 ~]$ find dawa -type f -size 15M -print 2>/dev/null
+dawa/folder31/19/file39
+```
+```bash
+[et0@TP2 ~]$ find dawa -type f -name 'cookie'
+dawa/folder14/25/cookie
+```
+```bash
+[et0@TP2 ~]$ find dawa -type f -name '.*' -print
+dawa/folder32/14/.hidden_file
+```
+```bash
+[et0@TP2 ~]$ find dawa -type f -newermt 2014-01-01 ! -newermt 2014-12-31 -print
+dawa/folder36/40/file43
+```
+```bash
+[et0@TP2 ~]$ find dawa -type f -path "*/folder*/*/*/*/*/*"
+dawa/folder37/45/23/43/54/file43
+```
