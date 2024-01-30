@@ -15,19 +15,19 @@
 
 ## 1. Find me
 
-🌞 **Trouver le chemin vers le répertoire personnel de votre utilisateur**
+🦦 **Trouver le chemin vers le répertoire personnel de votre utilisateur**
 
 ```bash
 /home/et0
 ```
 
-🌞 **Trouver le chemin du fichier de logs SSH**
+🦦 **Trouver le chemin du fichier de logs SSH**
 
 ```bash
 /var/log/secure
 ```
 
-🌞 **Trouver le chemin du fichier de configuration du serveur SSH**
+🦦 **Trouver le chemin du fichier de configuration du serveur SSH**
 
 ```bash
 /etc/ssh/sshd_config
@@ -37,7 +37,7 @@
 
 ## 1. Nouveau user
 
-🌞 **Créer un nouvel utilisateur**
+🦦 **Créer un nouvel utilisateur**
 
 ```bash
 [et0@TP2 ~]$ sudo adduser marmotte
@@ -55,14 +55,14 @@ et0  papier_alu
 
 ## 2. Infos enregistrées par le système
 
-🌞 **Prouver que cet utilisateur a été créé**
+🦦 **Prouver que cet utilisateur a été créé**
 
 ```bash
 [et0@TP2 home]$ sudo cat /etc/passwd | grep marmotte
 marmotte:x:1001:1001::/home/marmotte:/bin/bash
 ```
 
-🌞 **Déterminer le *hash* du password de l'utilisateur `marmotte`**
+🦦 **Déterminer le *hash* du password de l'utilisateur `marmotte`**
 
 ```bash
 [et0@TP2 etc]$ sudo cat shadow | grep marmotte
@@ -71,13 +71,13 @@ marmotte:$6$GS74rJj6cjlSz8Hd$3mQTwrP.2Brhvp1xInEJTwarOhpWwD2t82aoricrhZFzqbxmMEl
 
 ## 3. Connexion sur le nouvel utilisateur
 
-🌞 **Tapez une commande pour vous déconnecter : fermer votre session utilisateur**
+🦦 **Tapez une commande pour vous déconnecter : fermer votre session utilisateur**
 
 ```bash
 [et0@TP2 home]$ logout
 ```
 
-🌞 **Assurez-vous que vous pouvez vous connecter en tant que l'utilisateur `marmotte`**
+🦦 **Assurez-vous que vous pouvez vous connecter en tant que l'utilisateur `marmotte`**
 
 ```bash
 [marmotte@TP2 home]$ ls et0
@@ -98,7 +98,7 @@ ls: cannot open directory 'et0': Permission denied
 
 ## 1. Run then kill
 
-🌞 **Lancer un processus `sleep`**
+🦦 **Lancer un processus `sleep`**
 
 ```bash
 [et0@TP2 ~]$ sleep 1000
@@ -109,7 +109,7 @@ ls: cannot open directory 'et0': Permission denied
 et0         1366    1294  0 10:18 pts/0    00:00:00 sleep 1000
 ```
 
-🌞 **Terminez le processus `sleep` depuis le deuxième terminal**
+🦦 **Terminez le processus `sleep` depuis le deuxième terminal**
 
 ```bash
 [et0@TP2 ~]$ kill 1366
@@ -117,14 +117,14 @@ et0         1366    1294  0 10:18 pts/0    00:00:00 sleep 1000
 
 ## 2. Tâche de fond
 
-🌞 **Lancer un nouveau processus `sleep`, mais en tâche de fond**
+🦦 **Lancer un nouveau processus `sleep`, mais en tâche de fond**
 
 ```bash
 [et0@TP2 ~]$ sleep 1000&
 [1] 1388
 ```
 
-🌞 **Visualisez la commande en tâche de fond**
+🦦 **Visualisez la commande en tâche de fond**
 
 ```bash
 [et0@TP2 ~]$ ps -fe | grep sleep
@@ -137,14 +137,14 @@ et0         1388    1294  0 10:27 pts/0    00:00:00 sleep 1000
 
 - sous Linux, on met pas l'extension `.exe`, s'il y a pas d'extensions, c'est que c'est un exécutable généralement
 
-🌞 **Trouver le chemin où est stocké le programme `sleep`**
+🦦 **Trouver le chemin où est stocké le programme `sleep`**
 
 ```bash
 [et0@TP2 /]$ ls -al /usr/bin | grep sleep
 -rwxr-xr-x.  1 root root   68896 Apr 24  2023 sleep
 ```
 
-🌞 Tant qu'on est à chercher des chemins : **trouver les chemins vers tous les fichiers qui s'appellent `.bashrc`**
+🦦 Tant qu'on est à chercher des chemins : **trouver les chemins vers tous les fichiers qui s'appellent `.bashrc`**
 
 ```bash
 [et0@TP2 ~]$ find / -name .bashrc 2>/dev/null
@@ -183,7 +183,7 @@ $ which ls
 /usr/bin/ls
 ```
 
-🌞 **Vérifier que**
+🦦 **Vérifier que**
 
 ```bash
 [et0@TP2 ~]$ echo $PATH
@@ -205,27 +205,27 @@ $ which ls
 - on dit que `apt` et `dnf` sont des gestionnaires de paquets
 - ça permet aux utilisateurs de télécharger des nouveaux programmes (ou d'autres trucs) depuis un endroit safe
 
-🌞 **Installer le paquet `git`**
+🦦 **Installer le paquet `git`**
 
 ```bash
 [et0@TP2 ~]$ sudo dnf install git
 [sudo] password for et0: 
 ```
 
-🌞 **Utiliser une commande pour lancer git**
+🦦 **Utiliser une commande pour lancer git**
 
 ```bash
 [et0@TP2 ~]$ which git
 /usr/bin/git
 ```
 
-🌞 **Installer le paquet `nginx`**
+🦦 **Installer le paquet `nginx`**
 
 ```bash
 sudo dnf install nginx
 ```
 
-🌞 **Déterminer**
+🦦 **Déterminer**
 
 ```bash
 /var/log/nginx/
@@ -234,7 +234,7 @@ sudo dnf install nginx
 /etc/nginx/
 ```
 
-🌞 **Mais aussi déterminer...**
+🦦 **Mais aussi déterminer...**
 
 ```bash
 [et0@TP2 ~]$ sudo cat /var/log/dnf.log | grep http
@@ -265,13 +265,13 @@ Pour finir de vous exercer avec le terminal, je vous ai préparé une poupée ru
 - une fois que vous avez trouvé le dossier `dawa/`, vous avez fini le jeu de poupées russes
 - vous allez devoir trouver les fichiers spécifiques que je vous demande à l'intérieur de ce dossier
 
-🌞 **Récupérer le fichier `meow`**
+🦦 **Récupérer le fichier `meow`**
 
 ```bash
 stanislasthabault@MacBook-Pro-de-Stanislas ~ % scp meow et0@10.1.1.11:/home/et0/meow
 ```
 
-🌞 **Trouver le dossier `dawa/`**
+🦦 **Trouver le dossier `dawa/`**
 
 ```bash
 [et0@TP2 ~]$ file meow
@@ -327,7 +327,7 @@ meow.tar
 [et0@TP2 ~]$ tar -xvf meow.tar
 ```
 
-🌞 **Dans le dossier `dawa/`, déterminer le chemin vers**
+🦦 **Dans le dossier `dawa/`, déterminer le chemin vers**
 
 ```bash
 [et0@TP2 ~]$ find dawa -type f -size 15M -print 2>/dev/null

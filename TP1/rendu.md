@@ -41,7 +41,7 @@ Au début je vous indique des façons de casser la machine, et dans un deuxième
 
 ## 2. Fichier
 
-🌞 **Supprimer des fichiers**
+🦦 **Supprimer des fichiers**
 
 ```
 Last login: Tue Dec 19 09:21:03 on ttys001
@@ -103,7 +103,7 @@ symvers-5.14.0-284.30.1.el9_2.aarch64.gz
 
 ## 3. Utilisateurs
 
-🌞 **Mots de passe**
+🦦 **Mots de passe**
 
 ```
 Last login: Tue Dec 19 09:50:55 2023
@@ -122,7 +122,7 @@ other             remote         sssd-shadowutils  system-auth
 [root@tp1 pam.d]# rm -f systemd-user system-auth password-auth passwd login
 ```
 
-🌞 **Another way ?**
+🦦 **Another way ?**
 
 ```
 Last login: Tue Dec 19 09:50:55 2023
@@ -143,7 +143,7 @@ other             runuser              sssd-shadowutils       vlock
 
 ## 4. Disques
 
-🌞 **Effacer le contenu du disque dur**
+🦦 **Effacer le contenu du disque dur**
 
 ```
 [et0@tp1 ~]$ sudo dd if=/dev/zero of=/dev/mapper/rl-root bs=4M status=progress
@@ -160,7 +160,7 @@ Segmentation fault
 
 ## 5. Malware
 
-🌞 **Reboot automatique**
+🦦 **Reboot automatique**
 
 ```
 Last login: Tue Dec 19 11:03:16 2023
@@ -199,7 +199,7 @@ sudo reboot
 
 ## 6. You own way
 
-🌞 **Trouvez 4 autres façons de détuire la machine**
+🦦 **Trouvez 4 autres façons de détuire la machine**
 
 Fork Bomb
 ```
