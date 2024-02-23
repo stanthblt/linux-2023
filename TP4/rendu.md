@@ -17,7 +17,7 @@ Comme vu en cours, le partitionnement dans les systèmes GNU/Linux s'effectue g�
 
 **Allons !**
 
-🌞 **Partitionner le disque à l'aide de LVM**
+🦦 **Partitionner le disque à l'aide de LVM**
 
 ```bash
 [et0@storage ~]$ lsblk
@@ -53,7 +53,7 @@ vdc         252:32   0    2G  0 disk
   Logical volume "toto" created.
 ```
 
-🌞 **Formater la partition**
+🦦 **Formater la partition**
 
 ```bash
 [et0@storage ~]$ sudo mkfs -t ext4 /dev/storage/toto
@@ -70,7 +70,7 @@ Creating journal (16384 blocks): done
 Writing superblocks and filesystem accounting information: done
 ```
 
-🌞 **Monter la partition**
+🦦 **Monter la partition**
 
 ```bash
 [et0@storage ~]$ sudo mkdir /mnt/toto
@@ -125,7 +125,7 @@ L'objectif :
   - le dossier `/storage/site_web_1/` est monté dans `/var/www/site_web_1/`
   - le dossier `/storage/site_web_2/` est monté dans `/var/www/site_web_2/`
 
-🌞 **Donnez les commandes réalisées sur le serveur NFS `storage.tp4.linux`**
+🦦 **Donnez les commandes réalisées sur le serveur NFS `storage.tp4.linux`**
 
 ```bash
 [et0@storage ~]$ sudo cat /etc/exports
@@ -133,7 +133,7 @@ L'objectif :
 /mnt/storage/site_web_2     10.1.1.12(rw,sync,no_subtree_check)
 ```
 
-🌞 **Donnez les commandes réalisées sur le client NFS `web.tp4.linux`**
+🦦 **Donnez les commandes réalisées sur le client NFS `web.tp4.linux`**
 
 ```bash
 [et0@web ~]$ sudo cat /etc/fstab | grep site_web_
@@ -185,7 +185,7 @@ Une fois le serveur web NGINX installé (grâce à un paquet), sont créés sur 
 
 🖥️ **VM web.tp4.linux**
 
-🌞 **Installez NGINX**
+🦦 **Installez NGINX**
 
 ```bash
 [et0@web ~]$ sudo dnf install nginx
@@ -207,7 +207,7 @@ $ sudo systemctl start nginx
 $ sudo systemctl status nginx
 ```
 
-🌞 **Analysez le service NGINX**
+🦦 **Analysez le service NGINX**
 
 ```bash
 [et0@web ~]$ sudo ps -ef | grep nginx
@@ -255,7 +255,7 @@ lrwxrwxrwx. 1 root root   37 Oct 16 20:00 system_noindex_logo.png -> ../../pixma
 
 **Et ça serait bien d'accéder au service non ?** Genre c'est un serveur web. On veut voir un site web !
 
-🌞 **Configurez le firewall pour autoriser le trafic vers le service NGINX**
+🦦 **Configurez le firewall pour autoriser le trafic vers le service NGINX**
 
 ```bash
 [et0@web ~]$ sudo firewall-cmd --add-port=80/tcp --permanent
@@ -274,7 +274,7 @@ success
   source-ports:
 ```
 
-🌞 **Accéder au site web**
+🦦 **Accéder au site web**
 
 ```bash
 stan@MacBook-Pro-de-Stanislas ~ % curl 10.1.1.12
@@ -588,7 +588,7 @@ stan@MacBook-Pro-de-Stanislas ~ % curl 10.1.1.12
 </html>
 ```
 
-🌞 **Vérifier les logs d'accès**
+🦦 **Vérifier les logs d'accès**
 
 ```bash
 [et0@web nginx]$ sudo tail -n 3 access.log
@@ -599,7 +599,7 @@ stan@MacBook-Pro-de-Stanislas ~ % curl 10.1.1.12
 
 ## 5. Modif de la conf du serveur web
 
-🌞 **Changer le port d'écoute**
+🦦 **Changer le port d'écoute**
 
 ```bash
 [et0@web nginx]$ cat nginx.conf | grep listen
@@ -927,7 +927,7 @@ stan@MacBook-Pro-de-Stanislas ~ % curl 10.1.1.12:8080
 </html>
 ```
 
-🌞 **Changer l'utilisateur qui lance le service**
+🦦 **Changer l'utilisateur qui lance le service**
 
 ```bash
 [et0@web nginx]$ sudo cat nginx.conf | grep user
@@ -946,7 +946,7 @@ et0         4537    4218  0 22:42 pts/0    00:00:00 grep --color=auto nginx
 
 **Il est temps d'utiliser ce qu'on a fait à la partie 2 !**
 
-🌞 **Changer l'emplacement de la racine Web**
+🦦 **Changer l'emplacement de la racine Web**
 
 ```bash
 [et0@web nginx]$ sudo cat nginx.conf | grep root
@@ -984,7 +984,7 @@ Si on veut héberger plusieurs sites web, il faut donc déclarer plusieurs blocs
 
 Et le fichier de conf principal contient une ligne qui inclut tous les fichiers de confs additionnels.
 
-🌞 **Repérez dans le fichier de conf**
+🦦 **Repérez dans le fichier de conf**
 
 ```bash
 [et0@web nginx]$ sudo cat nginx.conf | grep conf.d
@@ -992,7 +992,7 @@ Et le fichier de conf principal contient une ligne qui inclut tous les fichiers 
     include /etc/nginx/conf.d/*.conf;
 ```
 
-🌞 **Créez le fichier de configuration pour le premier site**
+🦦 **Créez le fichier de configuration pour le premier site**
 
 ```bash
 [et0@web conf.d]$ sudo cat site_web_1.conf
@@ -1015,7 +1015,7 @@ server {
 }
 ```
 
-🌞 **Créez le fichier de configuration pour le deuxième site**
+🦦 **Créez le fichier de configuration pour le deuxième site**
 
 ```bash
 [et0@web conf.d]$ sudo cat site_web_2.conf
@@ -1046,7 +1046,7 @@ LISTEN 0      511             [::]:8080         [::]:*    users:(("nginx",pid=46
 LISTEN 0      511             [::]:8888         [::]:*    users:(("nginx",pid=4644,fd=9),(nginx",pid=4643,fd=9),("nginx",pid=4642,fd=9)) ino:33169 sk:59 cgroup:/system.slice/nginx.service v6only:1 <->
 ```
 
-🌞 **Prouvez que les deux sites sont disponibles**
+🦦 **Prouvez que les deux sites sont disponibles**
 
 ```bash
 stan@MacBook-Pro-de-Stanislas ~ % curl 10.1.1.12:8888
