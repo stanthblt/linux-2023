@@ -1056,12 +1056,9 @@ stan@MacBook-Pro-de-Stanislas ~ % curl 10.1.1.12:8888
   <meta charset="utf-8">
   <title>Titre de la page</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
 </head>
 <body>
-  ...
-  <h1>MEOW</h1>
-  ...
+  <h1>MEOW site 2</h1>
 </body>
 </html>
 ```
@@ -1074,12 +1071,9 @@ stan@MacBook-Pro-de-Stanislas ~ % curl 10.1.1.12:8080
   <meta charset="utf-8">
   <title>Titre de la page</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
 </head>
 <body>
-  ...
-  <h1>MEOW</h1>
-  ...
+  <h1>MEOW site 1</h1>
 </body>
 </html>
 ```
