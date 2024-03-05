@@ -72,8 +72,6 @@ PATH directories :
 Here is your random cat (jpg file) : https://....
 ```
 
-> ⚠️ **Votre script doit fonctionner peu importe les conditions** : peu importe le nom de la machine, ou son adresse IP (genre il est interdit de récupérer pile 10 char sous prétexte que ton adresse IP c'est `10.10.10.1` et qu'elle fait 10 char de long)
-
 ## Rendu
 
 📁 **Fichier `/srv/idcard/idcard.sh`**
@@ -188,6 +186,93 @@ echo "$log_line"
 [download] Destination: Travis Scott - goosebumps ft. Kendrick Lamar-Dst9gZkq1a8.mp4
 [download] 100% of 15.82MiB in 00:0071MiB/s ETA 00:00known ETA
 ```
+
+## 2. MAKE IT A SERVICE
+
+### A. Adaptation du script
+
+YES. Yet again. **On va en faire un _service_.**
+
+L'idée :
+
+➜ plutôt que d'appeler la commande à la main quand on veut télécharger une vidéo, **on va créer un service qui les téléchargera pour nous**
+
+➜ **le service s'exécute en permanence en tâche de fond**
+
+- il surveille un fichier précis
+- s'il trouve une nouvelle ligne dans le fichier, il vérifie que c'est bien une URL de vidéo youtube
+  - si oui, il la télécharge, puis enlève la ligne
+  - sinon, il enlève juste la ligne
+
+➜ **qui écrit dans le fichier pour ajouter des URLs ? Bah vous !**
+
+- vous pouvez écrire une liste d'URL, une par ligne, et le service devra les télécharger une par une
+
+---
+
+Pour ça, procédez par étape :
+
+- **partez de votre script précédent** (gardez une copie propre du premier script, qui doit être livré dans le dépôt git)
+  - le nouveau script s'appellera `yt-v2.sh`
+- **adaptez-le pour qu'il lise les URL dans un fichier** plutôt qu'en argument sur la ligne de commande
+- **faites en sorte qu'il tourne en permanence**, et vérifie le contenu du fichier toutes les X secondes
+  - boucle infinie qui :
+    - lit un fichier
+    - effectue des actions si le fichier n'est pas vide
+    - sleep pendant une durée déterminée
+- **il doit marcher si on précise une vidéo par ligne**
+  - il les télécharge une par une
+  - et supprime les lignes une par une
+
+### B. Le service
+
+➜ **une fois que tout ça fonctionne, enfin, créez un service** qui lance votre script :
+
+- créez un fichier `/etc/systemd/system/yt.service`. Il comporte :
+  - une brève description
+  - un `ExecStart` pour indiquer que ce service sert à lancer votre script
+  - une clause `User=` pour indiquer que c'est l'utilisateur `yt` qui lance le script
+    - créez l'utilisateur s'il n'existe pas
+    - faites en sorte que le dossier `/srv/yt` et tout son contenu lui appartienne
+    - le dossier de log doit lui appartenir aussi
+    - l'utilisateur `yt` ne doit pas pouvoir se connecter sur la machine
+
+```bash
+[Unit]
+Description=<Votre description>
+
+[Service]
+ExecStart=<Votre script>
+User=yt
+
+[Install]
+WantedBy=multi-user.target
+```
+
+> Pour rappel, après la moindre modification dans le dossier `/etc/systemd/system/`, vous devez exécuter la commande `sudo systemctl daemon-reload` pour dire au système de lire les changements qu'on a effectué.
+
+Vous pourrez alors interagir avec votre service à l'aide des commandes habituelles `systemctl` :
+
+- `systemctl status yt`
+- `sudo systemctl start yt`
+- `sudo systemctl stop yt`
+
+> ⚠️ **Votre script doit fonctionner peu importe les conditions** : peu importe le nom de la machine, ou son adresse IP (genre il est interdit de récupérer pile 10 char sous prétexte que ton adresse IP c'est `10.10.10.1` et qu'elle fait 10 char de long)
+
+### C. Rendu
+
+📁 **Le script `/srv/yt/yt-v2.sh`**
+
+📁 **Fichier `/etc/systemd/system/yt.service`**
+
+🌞 Vous fournirez dans le compte-rendu, en plus des fichiers :
+
+- un `systemctl status yt` quand le service est en cours de fonctionnement
+- un extrait de `journalctl -xe -u yt`
+
+> Hé oui les commandes `journalctl` fonctionnent sur votre service pour voir les logs ! Et vous devriez constater que c'est vos `echo` qui pop. En résumé, **le STDOUT de votre script, c'est devenu les logs du service !**
+
+🌟**BONUS** : get fancy. Livrez moi un gif ou un [asciinema](https://asciinema.org/) (PS : c'est le feu asciinema) de votre service en action, où on voit les URLs de vidéos disparaître, et les fichiers apparaître dans le fichier de destination
 
 ```sh
 [et0@web yt]$ sudo cat /srv/yt/yt-v2.sh
