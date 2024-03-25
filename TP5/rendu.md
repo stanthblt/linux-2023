@@ -76,7 +76,7 @@ Here is your random cat (jpg file) : https://....
 
 📁 **Fichier `/srv/idcard/idcard.sh`**
 
-🌞 **Vous fournirez dans le compte-rendu Markdown**, en plus du fichier, **un exemple d'exécution avec une sortie**
+🦦 **Vous fournirez dans le compte-rendu Markdown**, en plus du fichier, **un exemple d'exécution avec une sortie**
 
 - genre t'exécutes ton script et tu copie/colles ça dans le compte-rendu
 
@@ -265,7 +265,7 @@ Vous pourrez alors interagir avec votre service à l'aide des commandes habituel
 
 📁 **Fichier `/etc/systemd/system/yt.service`**
 
-🌞 Vous fournirez dans le compte-rendu, en plus des fichiers :
+🦦 Vous fournirez dans le compte-rendu, en plus des fichiers :
 
 - un `systemctl status yt` quand le service est en cours de fonctionnement
 - un extrait de `journalctl -xe -u yt`
@@ -296,7 +296,7 @@ while true; do
 
     if [ -n "$url" ]; then
         if [[ $url =~ ^https:\/\/www\.youtube\.com\/watch\?v=[a-zA-Z0-9]{11}.*$ ]]; then
-            youtube_dl_command="cd $download_dir && $youtube_dl_path $url"
+            youtube_dl_command="cd $download_dir && $youtube_dl_path -x --audio-format mp3 $url"
 
             download_output=$(eval "$youtube_dl_command" 2>&1)
 
