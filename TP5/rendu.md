@@ -296,7 +296,7 @@ while true; do
 
     if [ -n "$url" ]; then
         if [[ $url =~ ^https:\/\/www\.youtube\.com\/watch\?v=[a-zA-Z0-9]{11}.*$ ]]; then
-            youtube_dl_command="cd $download_dir && $youtube_dl_path -x --audio-format mp3 $url"
+            youtube_dl_command="cd $download_dir && $youtube_dl_path $url"
 
             download_output=$(eval "$youtube_dl_command" 2>&1)
 
