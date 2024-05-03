@@ -42,4 +42,4 @@ Assurons-nous d'avoir les outils nécessaires installés pour travailler avec le
 
 ## Contacts
 
-Pour toute question ou préoccupation concernant les travaux pratiques, nous pouvons contacter l'enseignant responsable du module.
+Pour toute question ou préoccupation concernant les travaux pratiques, n'hésitez pas à me contacter.
